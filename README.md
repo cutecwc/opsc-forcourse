@@ -31,7 +31,7 @@ photos文件夹里的cloudWork.png是cloudWork.py代码截图，cloud.png是词�
 
 ## 3.杨子昂：
 
-
+area.py是用于分析爬虫所爬取的数据，然后依据爬取的数据进行分组，并将各组的数据用柱状图进行展示
 
 ## 4.房可飞：
 
