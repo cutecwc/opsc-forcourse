@@ -19,7 +19,7 @@
 
 **easedt.py**是简化数据的文件：对应：ishomework\rescources\isAnalys.csv（可分析的csv文件）
 
-**analyse.py**是分析数据的文件：对应：ishomework\photos中生成的psxxx图像
+**analyse.py**是分析数据的文件：对应：ishomework\photos中生成的ps[i]图像
 
 ## 2.孔维琛：
 
