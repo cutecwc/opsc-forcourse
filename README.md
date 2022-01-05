@@ -39,6 +39,7 @@ area.py是用于分析爬虫所爬取的数据，然后依据爬取的数据进�
 
 ## 5.陈帅：
 mongodb.py是将结果存储到mongodb的文件
+
 photos文件夹里的MongoDB_res是将爬取的结果存放到MongoDB数据库的截图
 
 
