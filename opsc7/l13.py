@@ -1,13 +1,15 @@
 # 数据可视化
 # 流萤漫天花共舞，闲蝉栖柳风奏湖
 # pip install pyecharts
-from typing import Counter
 import pyecharts
 import pandas
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib
+import matplotlib.mlab as mlab
+import seaborn as sns 
+
+np.random.seed(19680801)
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False 
@@ -93,13 +95,22 @@ def typstest2(df):
         else:
             others+=1
     xlist=[' 板楼',' 塔楼',' 板塔结合',' 其他']
-    numb=numb/2400
-    numc=numc/2400
-    numd=numd/2400
-    others=1-numb-numc-numd
+    numb=float(format(numb/2400,'.2f'))
+    numc=float(format(numc/2400,'.2f'))
+    numd=float(format(numd/2400,'.2f'))
+    others=(1-numb-numc-numd)
     pslist=[numb,numc,numd,others]
+    a1=int(numb*100)
+    a2=int(numc*100)
+    a3=int(numd*100)
+    a6=100-a1-a2-a3
+    a1=xlist[0]+str(a1)+'%'
+    a2=xlist[1]+str(a2)+'%'
+    a3=xlist[2]+str(a3)+'%'
+    a6=xlist[3]+str(a6)+'%'
+    xlists=[a1,a2,a3,a6]
     ylist=np.array(pslist)
-    plt.pie(ylist,labels=xlist,colors=["#d5695d", "#5d8ca8", "#65a479", "#a564c9"])
+    plt.pie(ylist,labels=xlists,colors=["#d5695d", "#5d8ca8", "#65a479", "#a564c9"])
     plt.title('楼房类型分布(饼状图)')
     plt.savefig('opsc7\photos\ps2.png',dpi = 400)
     plt.show()
@@ -217,15 +228,24 @@ def decoratetest2(df):
             numd+=1
         else:
             others+=1
-    xlist=[' 其他',' 精装',' 简装',' 毛坯']
+    xlist=[' 精装',' 简装',' 毛坯',' 其他']
     numb=float(format(numb/2400,'.2f'))
     numc=float(format(numc/2400,'.2f'))
     numd=float(format(numd/2400,'.2f'))
     others=(1-numb-numc-numd)
-    pslist=[others,numb,numc,numd]
+    pslist=[numb,numc,numd,others]
+    a1=int(numb*100)
+    a2=int(numc*100)
+    a3=int(numd*100)
+    a6=100-a1-a2-a3
+    a1=xlist[0]+str(a1)+'%'
+    a2=xlist[1]+str(a2)+'%'
+    a3=xlist[2]+str(a3)+'%'
+    a6=xlist[3]+str(a6)+'%'
+    xlists=[a1,a2,a3,a6]
     # xlists=[xlist[0]+str(others*100)[0]+str(others*100)[1]+str(others*100)[2]+str(others*100)[3]+'%',xlist[1]+str(numb*100)[0]+str(numb*100)[1]+str(numb*100)[2]+str(numb*100)[3]+'%',xlist[2]+str(numc*100)[0]+str(numc*100)[1]+str(numc*100)[2]+str(numc*100)[3]+'%',xlist[3]+str(numd*100)[0]+str(numd*100)[1]+str(numd*100)[2]+str(numd*100)[3]+'%']
     ylist=np.array(pslist)
-    plt.pie(ylist,labels=xlist,colors=["#d5695d", "#5d8ca8", "#65a479", "#a564c9"])
+    plt.pie(ylist,labels=xlists,colors=["#d5695d", "#5d8ca8", "#65a479", "#a564c9"])
     plt.title('楼房装饰方式分布(饼状图)')
     plt.savefig('opsc7\photos\ps6.png',dpi = 400)
     plt.show()
@@ -235,22 +255,6 @@ def decoratetest2(df):
 # 2022/1/5 数据分析
 # 对价格的分析
 # ========================================================================================================== #
-    '''
-    advertistitle    格局方正 采光好 保持的很干净 业主自住
-    locationa                     新华联家园南区
-    locationb                          果园
-    configs                         3室2厅
-    areas                       119.18平米#
-    directs                        南 西 北
-    decorates                         精装#
-    floors                      中楼层(共7层)
-    evers                         2002年建
-    typs                               板楼#
-    price                       44,052元/平
-    followers                      47人关注
-    publish                       1个月以前发布
-    '''
-
 def pricetest(df):
     li=listca(df,strs='price')
     ylist=[]
@@ -275,23 +279,229 @@ def pricetest(df):
                 continue
         numlist.append(counters)
     numlist.append(cb)
-    xlist=['小于4万','4~5万','5~6万','6~7万','7~8万','8~9万','9~10万','10~11万','11~12万','大于12万']
+    xlist=['<4','4~5','5~6','6~7','7~8','8~9','9~10','10~11','11~12','>12']
     resp=plt.bar(xlist, numlist,0.5,edgecolor='red',alpha=0.8)  # 横放条形图函数 barh
     plt.title('楼房单位面积的价格分布(柱状图)')
     ##############################设置xy轴字体大小 left
     plt.xticks(fontproperties = 'Times New Roman', size = 4)
     plt.yticks(fontproperties = 'Times New Roman', size = 5)
+    plt.xlabel('单位面积（万元）')
+    plt.ylabel('统计数目')
     ##############################设置数据标签
     for a,b in zip(xlist,numlist):
         plt.text(a,b,b,ha='center',va='bottom',fontsize=6)
     ##############################
-    # plt.savefig('opsc7\photos\ps7.png',dpi = 400)
+    plt.savefig('opsc7\photos\ps7.png',dpi = 400)
+    plt.show()
+
+# 对建成时间的分析
+# ========================================================================================================== #
+def everstest(df):
+    li=listca(df,strs='evers')
+    ca=0
+    cb=0
+    numlist=[]
+    cnt=0
+    for num in range(0,20):
+        if li[num]<1985:
+            ca+=1
+        elif li[num]>=2015:
+            cb+=1
+        else :
+            continue
+    numlist.append(ca)
+    for s in range(1985,2015,5):
+        counters=0
+        for num in range(0,2400):
+            if(li[num]>=s and li[num]<(s+5)):
+                counters+=1
+            else:
+                continue
+        numlist.append(counters)
+    numlist.append(cb)
+    xlist=['before 1985','after 1985','after 1990','after 1995','after 2000','after 2005','after 2010','after 2015']
+    resp=plt.bar(xlist, numlist,0.5,edgecolor='red',alpha=0.8)  # 横放条形图函数 barh
+    plt.title('楼房建筑起始年分布(柱状图)')
+    ##############################设置xy轴字体大小 left
+    plt.xticks(fontproperties = 'Times New Roman', size = 4)
+    plt.yticks(fontproperties = 'Times New Roman', size = 5)
+    plt.xlabel('建成年份')
+    plt.ylabel('统计数目')
+    ##############################设置数据标签
+    for a,b in zip(xlist,numlist):
+        plt.text(a,b,b,ha='center',va='bottom',fontsize=6)
+    ##############################
+    plt.savefig('opsc7\photos\ps8.png',dpi = 400)
+    plt.show()
+
+def floorstest(df):
+    li=listca(df,strs='floors')
+    numb=0
+    numc=0
+    numd=0
+    nume=0
+    numf=0
+    others=0
+    for num in range(0,2400):
+        if(li[num]==' 高楼层'):
+            numb+=1
+        elif(li[num]==' 中楼层'):
+            numc+=1
+        elif(li[num]==' 低楼层'):
+            numd+=1
+        elif(li[num]==' 顶层'):
+            nume+=1
+        elif(li[num]==' 底层'):
+            numf+=1
+        else:
+            others+=1
+    xlist=[' 高楼层',' 中楼层',' 低楼层',' 顶层',' 底层','未指定']
+    numb=float(format(numb/2400,'.2f'))
+    numc=float(format(numc/2400,'.2f'))
+    numd=float(format(numd/2400,'.2f'))
+    nume=float(format(nume/2400,'.2f'))
+    numf=float(format(numf/2400,'.2f'))
+    others=(1-numb-numc-numd-nume-numf)
+    pslist=[numb,numc,numd,nume,numf,others]
+    a1=int(numb*100)
+    a2=int(numc*100)
+    a3=int(numd*100)
+    a4=int(nume*100)
+    a5=int(numf*100)
+    a6=100-a1-a2-a3-a4-a5
+    a1=xlist[0]+str(a1)+'%'
+    a2=xlist[1]+str(a2)+'%'
+    a3=xlist[2]+str(a3)+'%'
+    a4=xlist[3]+str(a4)+'%'
+    a5=xlist[4]+str(a5)+'%'
+    a6=xlist[5]+str(a6)+'%'
+    xlists=[a1,a2,a3,a4,a5,a6]
+    ylist=np.array(pslist)
+    plt.pie(ylist,labels=xlists,colors=["#d5695d", "#5d8ca8", "#65a479", "#a564c9","#253fad","#3fda4d"])
+    plt.title('楼房所在楼层高度分布(饼状图)')
+    plt.savefig('opsc7\photos\ps9.png',dpi = 400)
+    plt.show()
+
+# ========================================================================================================== #
+# 公无渡河，公竟渡河！渡河而死，其奈公何？
+# 组合图
+# 关注人数与单位面积的价格
+# ========================================================================================================== #
+def cbchart1(df):
+    xli=listca(df,strs='price')
+    yli=listca(df,strs='followers')
+    xarr=np.array(xli)
+    yarr=np.array(yli)
+    colorlist=np.random.rand(2400)
+    plt.scatter(xarr,yarr,s=0.3,c=colorlist,alpha=0.8)
+    plt.xlabel('每单位面积(元)')
+    plt.ylabel('关注人数(人)')
+    plt.title('单位面积的价格与关注人数（散点图）展示')
+    plt.savefig('opsc7\photos\ps10.png',dpi = 400)
+    plt.show()
+
+# ========================================================================================================== #
+# 有酒湑我，无酒酤我。坎坎鼓我，蹲蹲舞我。迨我暇矣，饮此湑矣。
+# 面积与关注人数
+# ========================================================================================================== #
+def cbchart2(df):
+    '''
+    advertistitle    格局方正 采光好 保持的很干净 业主自住
+    locationa                     新华联家园南区
+    locationb                          果园
+    configs                         3室2厅
+    areas                       119.18平米#
+    directs                        南 西 北
+    decorates                         精装#
+    floors                      中楼层(共7层)#
+    evers                         2002年建#
+    typs                               板楼#
+    price                       44,052元/平#
+    followers                      47人关注
+    publish                       1个月以前发布
+    '''
+    xlis=listca(df,strs='areas')
+    ylis=listca(df,strs='followers')
+    xli=[]
+    yli=[]
+    cnt=0
+    for num in range(0,2400):
+        if(xlis[num]<150.0):
+            xli.append(xlis[num])
+            yli.append(ylis[num])
+            cnt+=1
+        else:
+            continue
+    xarr=np.array(xli)
+    yarr=np.array(yli)
+    colorlist=np.random.rand(cnt)
+    plt.scatter(xarr,yarr,s=0.3,c=colorlist,alpha=0.8)
+    plt.xlabel('每单位面积(元)')
+    plt.ylabel('关注人数(人)')
+    plt.title('面积(all)与关注人数（散点图）展示')
+    ###########################
+    # https://www.pythonf.cn/read/61655
+    z1=np.polyfit(xarr,yarr,1)
+    p1=np.poly1d(z1)
+    yvals=p1(xarr)
+    plot2=plt.plot(xarr, yvals, 'r',label='polyfit values',linewidth=0.1)
+    np.polyfit(xarr, yarr, 2, rcond=None, full=False, w=None, cov=False)
+    plt.show()
+
+def cbcharts3(df):
+    '''
+    resp=plt.bar(xlist, numlist,0.5,edgecolor='red',alpha=0.8)  # 横放条形图函数 barh
+    ##############################设置数据标签
+    for a,b in zip(xlist,numlist):
+        plt.text(a,b,b,ha='center',va='bottom',fontsize=6)
+    '''
+    xli=listca(df,strs='price')
+    yli=listca(df,strs='followers')
+    numlist=[]
+    flrlist=[]
+    c1=0
+    c2=0
+    for num in range(0,2400):
+        if xli[num]>=170000:
+            c1+=1
+            c2+=yli[num]
+        else:
+            continue
+    for s in range(10000,170000,10000):
+        counters=0
+        flcnt=0
+        for num in range(0,2400):
+            if(xli[num]>=s and xli[num]<(s+10000)):
+                counters+=1
+                flcnt+=yli[num]
+            else:
+                continue
+        numlist.append(counters)
+        flrlist.append(flcnt)
+    numlist.append(c1)
+    flrlist.append(c2)
+    xlists=['1~2','2~3','3~4','4~5','5~6','6~7','7~8','8~9','9~10','10~11','11~12','12~13','13~14','14~15','15~16','16~17','>17']
+    resp=plt.bar(xlists, flrlist,0.5,edgecolor='grey',alpha=0.8)  # 条形图函数 bar
+    # plt.plot(xarr,yarr,s=0.3,alpha=0.8)
+    plt.title('单位面积的价格与关注人数（直方图拟合）展示')
+    ##############################设置xy轴字体大小 left
+    plt.xticks(fontproperties = 'Times New Roman', size = 4)
+    plt.yticks(fontproperties = 'Times New Roman', size = 5)
+    plt.xlabel('单位面积（万元）')
+    plt.ylabel('统计数目(人数)')
+    ##############################设置数据标签
+    for a,b in zip(xlists,flrlist):
+        plt.text(a,b,b,ha='center',va='bottom',fontsize=6)
+    ##############################
+    # sns.set_palette("hls") #设置所有图的颜色，使用hls色彩空间
+    # sns.distplot(flrlist,color="r",bins=17,kde=True)
+    plt.savefig('opsc7\photos\ps12.png',dpi = 400)
     plt.show()
 
 # 在runs中修改调用的函数名，以调用不同函数
 # fieldnames=['locationa','locationb','configsa','configsb','areas','decorates','floors','evers','typs','price','followers']
 def runs(df):
-    pricetest(df)
+    cbcharts3(df)
     
 def main():
     tst()
