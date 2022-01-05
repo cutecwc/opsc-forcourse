@@ -26,11 +26,31 @@ l3.py
 
 #### ishomework 文件夹里是大作业文件：
 
-其中：resources存放backup备份；islist0.cvs（初始爬取的数据），isSplited.cvs（分割后的数据）
+1.陈维聪：
+
+resources存放backup备份；islist0.cvs（初始爬取的数据），isSplited.cvs（分割后的数据）
 
 dataSplit.py是分割数据的python文件
 
 parses.py是爬虫文件
+
+2.孔维琛：
+
+cloudWork.py用于分析数据词频和生成词云
+
+render.html是运行cloudWork.py之后生成的词云文件，用浏览器打开即可以看见生成出来的词云
+
+3.杨子昂：
+
+
+
+4.房可飞：
+
+
+
+5.陈帅：
+
+
 
 #### 其他opsc[i]文件夹的是测试文件
 
