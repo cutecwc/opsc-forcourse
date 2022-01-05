@@ -42,7 +42,7 @@ photos文件夹里的cloudWork.png是cloudWork.py代码截图，cloud.png是词�
 
 
 ## 5.陈帅：
-
+photos文件夹里的MongoDB_res是将爬取的结果存放到MongoDB数据库的截图
 
 
 
