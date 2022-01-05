@@ -483,7 +483,7 @@ def cbcharts3(df):
     xlists=['1~2','2~3','3~4','4~5','5~6','6~7','7~8','8~9','9~10','10~11','11~12','12~13','13~14','14~15','15~16','16~17','>17']
     resp=plt.bar(xlists, flrlist,0.5,edgecolor='grey',alpha=0.8)  # 条形图函数 bar
     # plt.plot(xarr,yarr,s=0.3,alpha=0.8)
-    plt.title('单位面积的价格与关注人数（直方图拟合）展示')
+    plt.title('单位面积的价格与关注人数（直方图）展示')
     ##############################设置xy轴字体大小 left
     plt.xticks(fontproperties = 'Times New Roman', size = 4)
     plt.yticks(fontproperties = 'Times New Roman', size = 5)

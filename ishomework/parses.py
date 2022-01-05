@@ -28,12 +28,6 @@ def random_ua():
     return kw
 
 # XPath匹配和输出函数(其中，html为content值)
-def xfind(html,xpaths):
-    # 初步解析函数与解码
-    ans_list=html.xpath(xpaths)
-    # print(ans)
-    item={}
-    for ans in ans_list:
         # 处理字典数据，注意xpath表达式匹配结果是一个列表，因此需要索引[0]提取数据.strip()
         # //*[@id="content"]/div/ul/li
         # title:            .//div/div/a/text()
@@ -42,6 +36,12 @@ def xfind(html,xpaths):
         # price:            .//div/div[@class="unitPrice"]/span/text()
         # follows:          .//div/div[@class="followInfo"]/text()
         # 注意price与location为list
+def xfind(html,xpaths):
+    # 初步解析函数与解码
+    ans_list=html.xpath(xpaths)
+    # print(ans)
+    item={}
+    for ans in ans_list:
         item['title']=ans.xpath('.//div/div/a/text()')[0].strip()
         item['locationa']=ans.xpath('.//div/div/div[@class="positionInfo"]/a[1]/text()')[0].strip()
         item['locationb']=ans.xpath('.//div/div/div[@class="positionInfo"]/a[2]/text()')[0].strip()
