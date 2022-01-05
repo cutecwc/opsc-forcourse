@@ -35,7 +35,7 @@ area.py是用于分析爬虫所爬取的数据，然后依据爬取的数据进�
 
 ## 4.房可飞：
 
-
+excelWork.py是将爬取到的数据进行分类处理转存为test.xls
 
 ## 5.陈帅：
 mongodb.py是将结果存储到mongodb的文件
