@@ -11,21 +11,15 @@
 
 ## 1.陈维聪：
 
-https://blog.51cto.com/duzhenwen/2865990
+**resources**存放backup备份；ishomework\rescources\backup
 
-https://ip.jiangxianli.com/?page=1
+**parses.py**是爬虫文件：对应：ishomework\rescources\islist0.csv（初始爬取的数据）
 
-[ 1 ] "https://stackoverflow.com/questions/27499836/typeerror-bytes-object-is-not-callable" 关于**'bytes' object is not callable**
+**dataSplit.py**是分割数据的python文件：对应：isSplited.cvs（分割后的数据）
 
-resources存放backup备份；ishomework\rescources\backup
+**easedt.py**是简化数据的文件：对应：ishomework\rescources\isAnalys.csv（可分析的csv文件）
 
-parses.py是爬虫文件：对应：ishomework\rescources\islist0.csv（初始爬取的数据）
-
-dataSplit.py是分割数据的python文件：对应：isSplited.cvs（分割后的数据）
-
-easedt.py是简化数据的文件：对应：ishomework\rescources\isAnalys.csv（可分析的csv文件）
-
-analyse.py是分析数据的文件：对应：ishomework\photos中生成的图像
+**analyse.py**是分析数据的文件：对应：ishomework\photos中生成的图像
 
 ## 2.孔维琛：
 
