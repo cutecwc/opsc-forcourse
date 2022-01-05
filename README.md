@@ -27,12 +27,9 @@ cloudWork.py用于分析数据词频和生成词云
 
 render.html是运行cloudWork.py之后生成的词云文件，用浏览器打开即可以看见生成出来的词云
 
-## 3.杨子昂：
-=======
 photos文件夹里的cloudWork.png是cloudWork.py代码截图，cloud.png是词云展示截图
 
-3.杨子昂：
->>>>>>> a678e979928ca56f4eced75180429f852fccf9ed
+## 3.杨子昂：
 
 
 
